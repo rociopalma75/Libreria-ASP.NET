@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibrosPrestamosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Autor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_pais" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Pais" Relationship="Self.FK__Autor__id_pais__398D8EEE" FromRole="Autor" ToRole="Pais" />
+    <NavigationProperty Name="Libro" Relationship="Self.FK__Libro__id_autor__3F466844" FromRole="Autor" ToRole="Libro" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="correo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cant_libros_prestados" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Prestamos" Relationship="Self.FK__Prestamos__id_cl__4D94879B" FromRole="Cliente" ToRole="Prestamos" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Prestamos" Relationship="Self.FK__Prestamos__id_es__4E88ABD4" FromRole="Estado" ToRole="Prestamos" />
+  </EntityType>
+  <EntityType Name="Genero">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Libro" Relationship="Self.FK__Libro__id_genero__403A8C7D" FromRole="Genero" ToRole="Libro" />
+  </EntityType>
+  <EntityType Name="Libro">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="anio_publicacion" Type="Int32" Nullable="false" />
+    <Property Name="id_autor" Type="Int32" Nullable="false" />
+    <Property Name="id_genero" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Autor" Relationship="Self.FK__Libro__id_autor__3F466844" FromRole="Libro" ToRole="Autor" />
+    <NavigationProperty Name="Genero" Relationship="Self.FK__Libro__id_genero__403A8C7D" FromRole="Libro" ToRole="Genero" />
+    <NavigationProperty Name="Prestamos" Relationship="Self.FK__Prestamos__id_li__4CA06362" FromRole="Libro" ToRole="Prestamos" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pais">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Autor" Relationship="Self.FK__Autor__id_pais__398D8EEE" FromRole="Pais" ToRole="Autor" />
+  </EntityType>
+  <EntityType Name="Prestamos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_libro" Type="Int32" Nullable="false" />
+    <Property Name="id_cliente" Type="Int32" Nullable="false" />
+    <Property Name="fecha_prestamo" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fecha_devolucion" Type="DateTime" Precision="0" />
+    <Property Name="id_estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK__Prestamos__id_cl__4D94879B" FromRole="Prestamos" ToRole="Cliente" />
+    <NavigationProperty Name="Estado" Relationship="Self.FK__Prestamos__id_es__4E88ABD4" FromRole="Prestamos" ToRole="Estado" />
+    <NavigationProperty Name="Libro" Relationship="Self.FK__Prestamos__id_li__4CA06362" FromRole="Prestamos" ToRole="Libro" />
+    <Property Name="estado_eliminado" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PrestamosActivos">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="apellido" />
+      <PropertyRef Name="titulo" />
+      <PropertyRef Name="fecha_prestamo" />
+      <PropertyRef Name="fecha_devolucion" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_prestamo" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fecha_devolucion" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="PrestamosEntregados">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="apellido" />
+      <PropertyRef Name="titulo" />
+      <PropertyRef Name="fecha_prestamo" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_prestamo" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fecha_devolucion" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK__Autor__id_pais__398D8EEE">
+    <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+    <End Role="Autor" Type="Self.Autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Autor">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Libro__id_autor__3F466844">
+    <End Role="Autor" Type="Self.Autor" Multiplicity="1" />
+    <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="id_autor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prestamos__id_cl__4D94879B">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prestamos">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prestamos__id_es__4E88ABD4">
+    <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+    <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prestamos">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Libro__id_genero__403A8C7D">
+    <End Role="Genero" Type="Self.Genero" Multiplicity="1" />
+    <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genero">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="id_genero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prestamos__id_li__4CA06362">
+    <End Role="Libro" Type="Self.Libro" Multiplicity="1" />
+    <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Libro">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prestamos">
+        <PropertyRef Name="id_libro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LibrosPrestamosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Autor" EntityType="Self.Autor" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="Estado" EntityType="Self.Estado" />
+    <EntitySet Name="Genero" EntityType="Self.Genero" />
+    <EntitySet Name="Libro" EntityType="Self.Libro" />
+    <EntitySet Name="Pais" EntityType="Self.Pais" />
+    <EntitySet Name="Prestamos" EntityType="Self.Prestamos" />
+    <EntitySet Name="PrestamosActivos" EntityType="Self.PrestamosActivos" />
+    <EntitySet Name="PrestamosEntregados" EntityType="Self.PrestamosEntregados" />
+    <AssociationSet Name="FK__Autor__id_pais__398D8EEE" Association="Self.FK__Autor__id_pais__398D8EEE">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Autor" EntitySet="Autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Libro__id_autor__3F466844" Association="Self.FK__Libro__id_autor__3F466844">
+      <End Role="Autor" EntitySet="Autor" />
+      <End Role="Libro" EntitySet="Libro" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prestamos__id_cl__4D94879B" Association="Self.FK__Prestamos__id_cl__4D94879B">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Prestamos" EntitySet="Prestamos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prestamos__id_es__4E88ABD4" Association="Self.FK__Prestamos__id_es__4E88ABD4">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="Prestamos" EntitySet="Prestamos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Libro__id_genero__403A8C7D" Association="Self.FK__Libro__id_genero__403A8C7D">
+      <End Role="Genero" EntitySet="Genero" />
+      <End Role="Libro" EntitySet="Libro" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prestamos__id_li__4CA06362" Association="Self.FK__Prestamos__id_li__4CA06362">
+      <End Role="Libro" EntitySet="Libro" />
+      <End Role="Prestamos" EntitySet="Prestamos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

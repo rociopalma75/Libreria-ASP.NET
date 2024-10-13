@@ -1,0 +1,63 @@
+﻿@model Parcial1.Models.Prestamos
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3 class="mt-3">Está seguro que desea eliminar?</h3>
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_prestamo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_prestamo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_devolucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_devolucion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.nombreCompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.nombreCompleto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Libro.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Libro.titulo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color mt-4 mb-4">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

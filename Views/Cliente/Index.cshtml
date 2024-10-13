@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Parcial1.Models.Cliente>
+
+@{
+    ViewBag.Title = "Clientes";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="d-flex flex-row justify-content-between">
+    <p>
+        @Html.ActionLink("Crea nuevo cliente", "Create", new { area = "" }, htmlAttributes: new { @class = "btn btn-primary active" })
+    </p>
+    @using (Html.BeginForm("Index", "Cliente"))
+    {
+        <div class="form-inline">
+            @Html.Label("mostrarTodos", "Todos", htmlAttributes: new { @class = "form-check-label" })
+            @Html.CheckBox("mostrarTodos", false, htmlAttributes: new {@class = "form-check-input", @onchange = "this.form.submit();" })
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.correo)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.cant_libros_prestados)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.correo)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.cant_libros_prestados)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.id })*@
+            <a href="@Url.Action("Edit", new { id = item.id })" style="text-decoration:none">
+                <img src="~/Assets/imgs/edit-icon.png" alt="Editar" style="width: 20px; height: 20px;" />
+            </a>
+            <a href="@Url.Action("Details", new { id = item.id })" style="text-decoration:none">
+                <img src="~/Assets/imgs/details-icon.png" alt="Detalles" style="width: 20px; height: 20px;" />
+            </a>
+            <a href="@Url.Action("Delete", new { id = item.id })" style="text-decoration:none">
+                <img src="~/Assets/imgs/delete-icon.png" alt="Eliminar" style="width: 20px; height: 20px;" />
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

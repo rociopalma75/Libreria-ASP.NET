@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="position:relative; padding-bottom:9vh; min-height:100vh">
+    <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-ligth bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="~/Home/Index">
+                <img src="~/Assets/imgs/book-icon.png" width="30" height="30" alt="Icono-BookZone">
+            </a>
+            @Html.ActionLink("HOME", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-01" title="Alternar navegación" aria-controls="navbar-collapse-01"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-lg-inline-flex" id="navbar-collapse-01">
+                <ul class="navbar-nav justify-content-end flex-grow-1">
+                    <li>@Html.ActionLink("Autor", "Index", "Autor", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Libro", "Index", "Libro", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Clientes", "Index", "Cliente", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Prestamos", "Index", "Prestamos", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Info
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li>
+                            <button class="dropdown-item" type="button">
+                                @Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link " })
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item" type="button">
+                                @Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content" style="padding-bottom:20px">
+        @RenderBody()
+    </div>
+    <footer class="d-flex align-items-center justify-content-center w-100 bg-light-subtle" style="position:absolute; bottom:0; padding: 0; height: 8vh;">
+        <p style="padding:0; margin:0"> @DateTime.Now.Year - PAD</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LibrosPrestamosModelStoreContainer" CdmEntityContainer="LibrosPrestamosEntities">
+    <EntitySetMapping Name="Autor">
+      <EntityTypeMapping TypeName="LibrosPrestamosModel.Autor">
+        <MappingFragment StoreEntitySet="Autor">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="LibrosPrestamosModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="cant_libros_prestados" ColumnName="cant_libros_prestados" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estado">
+      <EntityTypeMapping TypeName="LibrosPrestamosModel.Estado">
+        <MappingFragment StoreEntitySet="Estado">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genero">
+      <EntityTypeMapping TypeName="LibrosPrestamosModel.Genero">
+        <MappingFragment StoreEntitySet="Genero">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Libro">
+      <EntityTypeMapping TypeName="LibrosPrestamosModel.Libro">
+        <MappingFragment StoreEntitySet="Libro">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="anio_publicacion" ColumnName="anio_publicacion" />
+          <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+          <ScalarProperty Name="id_genero" ColumnName="id_genero" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pais">
+      <EntityTypeMapping TypeName="LibrosPrestamosModel.Pais">
+        <MappingFragment StoreEntitySet="Pais">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prestamos">
+      <EntityTypeMapping TypeName="LibrosPrestamosModel.Prestamos">
+        <MappingFragment StoreEntitySet="Prestamos">
+          <ScalarProperty Name="estado_eliminado" ColumnName="estado_eliminado" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_libro" ColumnName="id_libro" />
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+          <ScalarProperty Name="fecha_prestamo" ColumnName="fecha_prestamo" />
+          <ScalarProperty Name="fecha_devolucion" ColumnName="fecha_devolucion" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrestamosActivos">
+      <EntityTypeMapping TypeName="LibrosPrestamosModel.PrestamosActivos">
+        <MappingFragment StoreEntitySet="PrestamosActivos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="fecha_prestamo" ColumnName="fecha_prestamo" />
+          <ScalarProperty Name="fecha_devolucion" ColumnName="fecha_devolucion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrestamosEntregados">
+      <EntityTypeMapping TypeName="LibrosPrestamosModel.PrestamosEntregados">
+        <MappingFragment StoreEntitySet="PrestamosEntregados">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="fecha_prestamo" ColumnName="fecha_prestamo" />
+          <ScalarProperty Name="fecha_devolucion" ColumnName="fecha_devolucion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

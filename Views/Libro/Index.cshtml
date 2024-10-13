@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Parcial1.Models.Libro>
+
+@{
+    ViewBag.Title = "Libros";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="d-flex flex-row justify-content-between">
+    <p>
+        @Html.ActionLink("Crear nuevo libro", "Create", new { area = "" }, htmlAttributes: new { @class = "btn btn-primary active" })
+    </p>
+    @using (Html.BeginForm("Index", "Libro"))
+    {
+        <div class="form-inline">
+            @Html.Label("mostrarTodos", "Todos", htmlAttributes: new {@class="form-check-label"})
+            @Html.CheckBox("mostrarTodos", false, htmlAttributes: new {@class="form-check-input", @onchange = "this.form.submit();"})
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.anio_publicacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Autor.nombreCompleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genero.descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.anio_publicacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Autor.nombreCompleto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genero.descripcion)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", new { id = item.id })" style="text-decoration:none">
+                <img src="~/Assets/imgs/edit-icon.png" alt="Editar" style="width: 20px; height: 20px;" />
+            </a>
+            <a href="@Url.Action("Details", new { id = item.id })" style="text-decoration:none">
+                <img src="~/Assets/imgs/details-icon.png" alt="Detalles" style="width: 20px; height: 20px;" />
+            </a>
+            <a href="@Url.Action("Delete", new { id = item.id })" style="text-decoration:none">
+                <img src="~/Assets/imgs/delete-icon.png" alt="Eliminar" style="width: 20px; height: 20px;" />
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

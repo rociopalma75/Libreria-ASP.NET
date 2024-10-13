@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibrosPrestamosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Autor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_pais" Type="int" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="correo" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="cant_libros_prestados" Type="int" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Genero">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Libro">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="anio_publicacion" Type="int" Nullable="false" />
+    <Property Name="id_autor" Type="int" Nullable="false" />
+    <Property Name="id_genero" Type="int" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pais">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prestamos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_libro" Type="int" Nullable="false" />
+    <Property Name="id_cliente" Type="int" Nullable="false" />
+    <Property Name="fecha_prestamo" Type="date" Nullable="false" />
+    <Property Name="fecha_devolucion" Type="date" />
+    <Property Name="id_estado" Type="int" Nullable="false" />
+    <Property Name="estado_eliminado" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'LibrosPrestamos.dbo.PrestamosActivos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="PrestamosActivos">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="apellido" />
+      <PropertyRef Name="titulo" />
+      <PropertyRef Name="fecha_prestamo" />
+      <PropertyRef Name="fecha_devolucion" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="fecha_prestamo" Type="date" Nullable="false" />
+    <Property Name="fecha_devolucion" Type="date" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'LibrosPrestamos.dbo.PrestamosEntregados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="PrestamosEntregados">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="apellido" />
+      <PropertyRef Name="titulo" />
+      <PropertyRef Name="fecha_prestamo" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="fecha_prestamo" Type="date" Nullable="false" />
+    <Property Name="fecha_devolucion" Type="date" />
+  </EntityType>
+  <Association Name="FK__Autor__id_pais__398D8EEE">
+    <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+    <End Role="Autor" Type="Self.Autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Autor">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Libro__id_autor__3F466844">
+    <End Role="Autor" Type="Self.Autor" Multiplicity="1" />
+    <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="id_autor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Libro__id_genero__403A8C7D">
+    <End Role="Genero" Type="Self.Genero" Multiplicity="1" />
+    <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genero">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="id_genero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prestamos__id_cl__4D94879B">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prestamos">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prestamos__id_es__4E88ABD4">
+    <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+    <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prestamos">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prestamos__id_li__4CA06362">
+    <End Role="Libro" Type="Self.Libro" Multiplicity="1" />
+    <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Libro">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prestamos">
+        <PropertyRef Name="id_libro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LibrosPrestamosModelStoreContainer">
+    <EntitySet Name="Autor" EntityType="Self.Autor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prestamos" EntityType="Self.Prestamos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PrestamosActivos" EntityType="Self.PrestamosActivos" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PrestamosActivos].[id] AS [id], 
+    [PrestamosActivos].[nombre] AS [nombre], 
+    [PrestamosActivos].[apellido] AS [apellido], 
+    [PrestamosActivos].[titulo] AS [titulo], 
+    [PrestamosActivos].[fecha_prestamo] AS [fecha_prestamo], 
+    [PrestamosActivos].[fecha_devolucion] AS [fecha_devolucion]
+    FROM [dbo].[PrestamosActivos] AS [PrestamosActivos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PrestamosEntregados" EntityType="Self.PrestamosEntregados" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PrestamosEntregados].[id] AS [id], 
+    [PrestamosEntregados].[nombre] AS [nombre], 
+    [PrestamosEntregados].[apellido] AS [apellido], 
+    [PrestamosEntregados].[titulo] AS [titulo], 
+    [PrestamosEntregados].[fecha_prestamo] AS [fecha_prestamo], 
+    [PrestamosEntregados].[fecha_devolucion] AS [fecha_devolucion]
+    FROM [dbo].[PrestamosEntregados] AS [PrestamosEntregados]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Autor__id_pais__398D8EEE" Association="Self.FK__Autor__id_pais__398D8EEE">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Autor" EntitySet="Autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Libro__id_autor__3F466844" Association="Self.FK__Libro__id_autor__3F466844">
+      <End Role="Autor" EntitySet="Autor" />
+      <End Role="Libro" EntitySet="Libro" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Libro__id_genero__403A8C7D" Association="Self.FK__Libro__id_genero__403A8C7D">
+      <End Role="Genero" EntitySet="Genero" />
+      <End Role="Libro" EntitySet="Libro" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prestamos__id_cl__4D94879B" Association="Self.FK__Prestamos__id_cl__4D94879B">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Prestamos" EntitySet="Prestamos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prestamos__id_es__4E88ABD4" Association="Self.FK__Prestamos__id_es__4E88ABD4">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="Prestamos" EntitySet="Prestamos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prestamos__id_li__4CA06362" Association="Self.FK__Prestamos__id_li__4CA06362">
+      <End Role="Libro" EntitySet="Libro" />
+      <End Role="Prestamos" EntitySet="Prestamos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

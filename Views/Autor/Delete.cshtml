@@ -1,0 +1,46 @@
+﻿@model Parcial1.Models.Autor
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3 class="mt-3">Está seguro que desea eliminar?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pais.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pais.descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color mt-4 mb-4">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

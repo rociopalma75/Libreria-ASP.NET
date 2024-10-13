@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="container-fluid d-flex flex-row flex-wrap justify-content-center align-items-center gap-4" style="background-image: url('../../Assets/imgs/fondo.png'); background-size: cover; height: 79vh; position: absolute; left: 0; ">
+    <div class="d-flex flex-column" style="width: 18rem;">
+        <img src="~/Assets/imgs/autor-fondo.png" style="height: 5rem" class="card-img-top rounded-2" alt="Gestion de Autores">
+        <div class="card-body">
+            <h5 class="card-title text-white mt-3">Autores</h5>
+            @Html.ActionLink("Ir a Gestion de Autores", "Index", "Autor", new { area = "" }, new { @class = "btn rounded-5 border-1 border-light mt-3 text-white" })
+        </div>
+    </div>
+    <div class="d-flex flex-column" style="width: 18rem;">
+        <img src="~/Assets/imgs/libro-fondo.png" style="height: 5rem" class="card-img-top rounded-2" alt="Gestion de Libros">
+        <div class="card-body">
+            <h5 class="card-title text-white mt-3">Libros</h5>
+            @Html.ActionLink("Ir a Gestion de Libros", "Index", "Libro", new { area = "" }, new { @class = "btn rounded-5 border-1 border-light mt-3 text-white" })
+        </div>
+    </div>
+    <div class="d-flex flex-column" style="width: 18rem;">
+        <img src="~/Assets/imgs/clientes-fondo.png" style="height: 5rem" class="card-img-top rounded-2" alt="Gestion de Clientes">
+        <div class="card-body">
+            <h5 class="card-title text-white mt-3">Clientes</h5>
+            @Html.ActionLink("Ir a Gestion de Clientes", "Index", "Cliente", new { area = "" }, new { @class = "btn rounded-5 border-1 border-light mt-3 text-white" })
+        </div>
+    </div>
+    <div class="d-flex flex-column" style="width: 18rem;">
+        <img src="~/Assets/imgs/prestamos-fondo.png" style="height: 5rem" class="card-img-top rounded-2" alt="Gestion de Prestamos">
+        <div class="card-body">
+            <h5 class="card-title text-white mt-3">Prestamos</h5>
+            @Html.ActionLink("Ir a Gestion de Prestamos", "Index", "Prestamos", new { area = "" }, new { @class = "btn rounded-5 border-1 border-light mt-3 text-white" })
+        </div>
+    </div>
+</div>

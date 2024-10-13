@@ -1,0 +1,54 @@
+﻿@model Parcial1.Models.Libro
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3 class="mt-3">Está seguro que desea eliminar?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.anio_publicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.anio_publicacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Autor.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Autor.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genero.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genero.descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>
